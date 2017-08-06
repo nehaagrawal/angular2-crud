@@ -32,14 +32,14 @@ console.log("dealer " + this.model.dealer);
 
 if(this.action == "create")
 {
-//this.httpRequestService.create();
+//this.httpRequestService.create(this.model);
     var newItem = this.createNewRowData();
     var res = this.myGridOptions.api.updateRowData({add: [newItem]});
 
 }
 else if (this.action == "update")
 {
- //this.httpRequestService.update();
+ //this.httpRequestService.update(this.model);
 //check if this works
   // this.myGridOptions.api.refreshCells(true);
 }
