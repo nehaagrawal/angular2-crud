@@ -21,13 +21,14 @@ constructor (private httpRequestService : HttpRequestService )
 ngOnInit(): void {
   this.myGridOptions = this.createGridOptions();
   this.myColumnDefs = [
-              {headerName: "Make", field: "make"},
-              {headerName: "Model", field: "model"},
-              {headerName: "Price", field: "price"},
-              {headerName: "Year", field: "year"},
-              {headerName: "Color", field: "color"},
-              {headerName: "Rating", field: "rating"},
-              {headerName: "Dealer Name", field: "dealer"},
+  {headerName : "#" , width: 30 , checkboxSelection: true , suppressSorting : true , suppresssMenu: true , pinned: true},
+              {headerName: "Make", field: "make" , editable :true},
+              {headerName: "Model", field: "model", editable :true},
+              {headerName: "Price", field: "price" , editable :true},
+              {headerName: "Year", field: "year" , editable :true},
+              {headerName: "Color", field: "color", editable :true},
+              {headerName: "Rating", field: "rating" , editable :true},
+              {headerName: "Dealer Name", field: "dealer", editable :true},
           ];
 
           this.rowData = [
@@ -37,8 +38,9 @@ ngOnInit(): void {
           ]
 
 /*
-          this.httpRequestService.getAsyncData("url").subscribe(result => {
-          this.rowData = result;
+          this.httpRequestService.getAsyncData("/testService").subscribe(result => {
+         console.log("result " + result);
+        // this.rowData = result;
           })
 */
 }
@@ -49,7 +51,8 @@ private createGridOptions ()
    enableColResize: true,
    enableSorting : true,
    enableFilter: true,
-   pagination: true
+   pagination: true,
+   rowSelection : 'multiple'
   };
 
 return gridOptions;

@@ -1,0 +1,10 @@
+{
+
+"/testService": {
+  "target": "https://jsonplaceholder.typicode.com/posts/1",
+  "secure": false,
+  "logLevel" : "debug",
+  "pathRewrite" :  {"^/testService" : ""},
+  "changeOrigin" : true
+}
+}
