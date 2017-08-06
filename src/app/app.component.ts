@@ -3,7 +3,7 @@ import {GridOptions} from "ag-grid/main";
 import {HttpRequestService} from './services/HttpRequest.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import {Car} from "./Car";
+import {Car} from "./model/Car";
 import {ModalContentComponent} from "./modal/create/createCarModal.component";
 import {UpdateCarModalComponent} from "./modal/update/updateCarModal.component";
 import {ConfirmationModalComponent} from "./modal/confirmation/confirmationModal.component";

@@ -2,7 +2,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Component ,OnInit , TemplateRef  } from '@angular/core';
 import {HttpRequestService} from '../../services/HttpRequest.service';
-import {Car} from "../../Car";
+import {Car} from "../../model/Car";
 
 
 @Component({
@@ -27,7 +27,7 @@ console.log("year " + this.model.year);
 console.log("color " + this.model.color);
 console.log("rating " + this.model.rating);
 console.log("dealer " + this.model.dealer);
-
+this.bsModalRef.hide();
 }
 
 

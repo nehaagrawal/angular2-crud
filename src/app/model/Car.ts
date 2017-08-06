@@ -6,7 +6,7 @@ export class Car {
     public year: number;
     public color: string;
     public rating: number;
-    public dealerName: string;
+    public dealer: string;
 
   constructor(
 
