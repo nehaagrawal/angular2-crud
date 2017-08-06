@@ -12,7 +12,6 @@ import {Car} from "../../model/Car";
 })
 export class ModalContentComponent {
   public title: string;
-  public list: any[] = [];
   model = new Car();
   constructor(public bsModalRef: BsModalRef , private httpRequestService : HttpRequestService) {}
 
