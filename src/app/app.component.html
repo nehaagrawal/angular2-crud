@@ -1,4 +1,4 @@
-
+<h1> {{title}}</h1>
 <div>
   <tabset>
     <tab heading="Tab 1">
@@ -11,13 +11,13 @@
         <div class="col-sm-4"></div>
 
         <div class="col-sm-1">
-          <button type="button" class="btn btn-primary" (click)="openModal(template)" >Create</button>
+          <button type="button" class="btn btn-primary" (click)="create(template)" >Create</button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-primary" >Update</button>
+          <button type="button" class="btn btn-primary" (click)="update()">Update</button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-primary" >Delete</button>
+          <button type="button" class="btn btn-primary" (click)="delete()">Delete</button>
         </div>
 
         <div class="col-sm-4"></div>

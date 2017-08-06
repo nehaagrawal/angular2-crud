@@ -11,11 +11,12 @@ import {Car} from "./Car";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Sample CRUD App';
+  title = 'Sample angular 2 App';
   private myColumnDefs: any[];
   private myGridOptions: GridOptions;
   private rowData;
   public bsModalRef: BsModalRef;
+  private updatedRows : any[];
 
 constructor (private httpRequestService : HttpRequestService , private modalService: BsModalService )
 {
@@ -55,10 +56,28 @@ private createGridOptions ()
    enableSorting : true,
    enableFilter: true,
    pagination: true,
-   rowSelection : 'multiple'
+   rowSelection : 'multiple',
+   onCellValueChanged : function(event)
+   {
+   var data = event.data;
+   console.log("row data " + JSON.stringify(data) );
+  // this.updatedRows.push(data);
+   console.log("onCellValueChanged " + event.colDef.field + "= " + event.newValue );
+   console.log(" this.updatedRows" + JSON.stringify( this.updatedRows) );
+
+   //keep an array of all update rows. On click of update , pass that array to rest service and then clear it.
+   },
+   onSelectionChanged: this.onSelectionChanged
   };
 
 return gridOptions;
+}
+
+onSelectionChanged()
+{
+console.log('selection changed');
+var selectedRows = this.myGridOptions.api.getSelectedRows();
+  // console.log(JSON.stringify(selectedRows) );
 }
 
 getGridOptions() : GridOptions
@@ -70,14 +89,25 @@ getColumnDef() : any[] {
   return this.myColumnDefs;
 }
 
-public openModal(template: TemplateRef<any>) {
+public create(template: TemplateRef<any>) {
     this.bsModalRef = this.modalService.show(ModalContentComponent);
-   this.bsModalRef.content.title = 'Create a New Car';
+   this.bsModalRef.content.title = 'Create New Car';
    let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
       this.bsModalRef.content.list = list;
       setTimeout(() => {
         list.push('PROFIT!!!');
       }, 2000);
+  }
+
+  update()
+  {
+  alert("update is called");
+  }
+
+  delete()
+  {
+  alert("delete is called");
+
   }
 
 }
