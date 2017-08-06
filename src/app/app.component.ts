@@ -1,7 +1,9 @@
-import { Component ,OnInit } from '@angular/core';
+import { Component ,OnInit , TemplateRef  } from '@angular/core';
 import {GridOptions} from "ag-grid/main";
 import {HttpRequestService} from './services/HttpRequest.service';
-
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import {Car} from "./Car";
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,9 @@ export class AppComponent implements OnInit {
   private myColumnDefs: any[];
   private myGridOptions: GridOptions;
   private rowData;
+  public bsModalRef: BsModalRef;
 
-constructor (private httpRequestService : HttpRequestService )
+constructor (private httpRequestService : HttpRequestService , private modalService: BsModalService )
 {
 
 }
@@ -67,4 +70,116 @@ getColumnDef() : any[] {
   return this.myColumnDefs;
 }
 
+public openModal(template: TemplateRef<any>) {
+    this.bsModalRef = this.modalService.show(ModalContentComponent);
+   this.bsModalRef.content.title = 'Create a New Car';
+   let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
+      this.bsModalRef.content.list = list;
+      setTimeout(() => {
+        list.push('PROFIT!!!');
+      }, 2000);
+  }
+
+}
+
+
+/* This is a component which we pass in modal*/
+
+@Component({
+  selector: 'modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <!--
+      <ul *ngIf="list.length">
+        <li *ngFor="let item of list">{{item}}</li>
+      </ul> -->
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="make">Make:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" required id="make" [(ngModel)]="model.make" name="make" placeholder="Enter make">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="modelNumber">Model:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="modelNumber"  required [(ngModel)]="model.modelNumber" name="modelNumber" placeholder="Enter Model">
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="control-label col-sm-3" for="price">Price:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="price" required [(ngModel)]="model.price" name="price" placeholder="Enter Price">
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="control-label col-sm-3" for="year">Year:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="year" required [(ngModel)]="model.year" name="year" placeholder="Enter Year">
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="control-label col-sm-3" for="color">Color:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="color" required [(ngModel)]="model.color" name="color" placeholder="Enter Color">
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="control-label col-sm-3" for="rating">Rating:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="rating" required [(ngModel)]="model.rating" name="rating" placeholder="Enter Rating">
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="control-label col-sm-3" for="dealer">Dealer:</label>
+          <div class="col-sm-9">
+            <input type="textbox" class="form-control" id="dealer" required [(ngModel)]="model.dealer" name="dealer" placeholder="Enter Dealer">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default" (click)="save()">Submit</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+    </div>
+  `
+})
+export class ModalContentComponent {
+  public title: string;
+  public list: any[] = [];
+  model = new Car();
+  constructor(public bsModalRef: BsModalRef) {}
+
+save()
+{
+
+console.log("clicked on save " );
+console.log("make " + this.model.make);
+console.log("model " + this.model.modelNumber);
+console.log("price " + this.model.price);
+console.log("year " + this.model.year);
+console.log("color " + this.model.color);
+console.log("rating " + this.model.rating);
+console.log("dealer " + this.model.dealer);
+
+}
 }

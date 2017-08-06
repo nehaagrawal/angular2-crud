@@ -1,22 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap';
-import { AppComponent } from './app.component';
+import { AppComponent , ModalContentComponent } from './app.component';
 import {AgGridModule} from "ag-grid-angular/main";
 import {HttpModule} from '@angular/http';
 import {HttpRequestService} from './services/HttpRequest.service';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent , ModalContentComponent
   ],
   imports: [
     BrowserModule,
     TabsModule.forRoot(),
     HttpModule,
-    AgGridModule.withComponents([])
+    FormsModule,
+    AgGridModule.withComponents([]),
+    ModalModule.forRoot()
   ],
   providers: [HttpRequestService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents : [ModalContentComponent]
 })
 export class AppModule { }
