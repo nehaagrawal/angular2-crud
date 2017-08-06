@@ -1,5 +1,7 @@
 import { Component ,OnInit } from '@angular/core';
 import {GridOptions} from "ag-grid/main";
+import {HttpRequestService} from './services/HttpRequest.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,10 @@ export class AppComponent implements OnInit {
   private myGridOptions: GridOptions;
   private rowData;
 
+constructor (private httpRequestService : HttpRequestService )
+{
+
+}
 ngOnInit(): void {
   this.myGridOptions = this.createGridOptions();
   this.myColumnDefs = [
@@ -30,6 +36,11 @@ ngOnInit(): void {
               {make: "Porsche", model: "Boxter", price: 72000, year: 2014, color: "grey" , rating : "4" , dealer : "Dealer 3"}
           ]
 
+/*
+          this.httpRequestService.getAsyncData("url").subscribe(result => {
+          this.rowData = result;
+          })
+*/
 }
 
 private createGridOptions ()
