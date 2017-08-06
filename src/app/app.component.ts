@@ -121,9 +121,15 @@ public create() {
   {
     this.bsModalRef = this.modalService.show(UpdateCarModalComponent);
     this.bsModalRef.content.title = 'Update Car';
-     this.bsModalRef.content.dealer = 'dealer name';
-      this.bsModalRef.content.action = "update";
-  }
+    console.log("selected row " + JSON.stringify(this.selectedRows[0]));
+     this.bsModalRef.content.model.make = this.selectedRows[0].make;
+     this.bsModalRef.content.model.modelNumber = this.selectedRows[0].modelNumber;
+     this.bsModalRef.content.model.price = this.selectedRows[0].price;
+     this.bsModalRef.content.model.year = this.selectedRows[0].year;
+     this.bsModalRef.content.model.color = this.selectedRows[0].color;
+     this.bsModalRef.content.model.rating = this.selectedRows[0].rating;
+     this.bsModalRef.content.model.dealer = this.selectedRows[0].dealer;
+     }
  }
 
   delete()

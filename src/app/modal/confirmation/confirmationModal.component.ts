@@ -26,11 +26,7 @@ confirm()
     var res = this.myGridOptions.api.updateRowData({remove: selectedData});
     //this.httpRequestService.delete(this.selectedRows);
   }
-  else if (this.action == "update")
-  {
 
-//this.httpRequestService.update();
-  }
     this.bsModalRef.hide();
 
 }
