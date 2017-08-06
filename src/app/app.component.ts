@@ -100,6 +100,8 @@ public create() {
     this.bsModalRef = this.modalService.show(ModalContentComponent);
     this.bsModalRef.content.title = 'Create New Car';
     this.bsModalRef.content.action = 'create';
+       this.bsModalRef.content.myGridOptions = this.myGridOptions;
+
 }
 
  update()
@@ -123,6 +125,8 @@ public create() {
    this.bsModalRef = this.modalService.show(ModalContentComponent);
     this.bsModalRef.content.title = 'Update Car';
     this.bsModalRef.content.action = 'update';
+       this.bsModalRef.content.myGridOptions = this.myGridOptions;
+
     console.log("selected row " + JSON.stringify(this.selectedRows[0]));
      this.bsModalRef.content.model.make = this.selectedRows[0].make;
      this.bsModalRef.content.model.modelNumber = this.selectedRows[0].modelNumber;
