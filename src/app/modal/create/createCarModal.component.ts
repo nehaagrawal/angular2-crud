@@ -14,7 +14,7 @@ export class ModalContentComponent {
   public title: string;
   public list: any[] = [];
   model = new Car();
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef , private httpRequestService : HttpRequestService) {}
 
 save()
 {
@@ -27,6 +27,9 @@ console.log("year " + this.model.year);
 console.log("color " + this.model.color);
 console.log("rating " + this.model.rating);
 console.log("dealer " + this.model.dealer);
+
+//this.httpRequestService.create();
+
 this.bsModalRef.hide();
 }
 
