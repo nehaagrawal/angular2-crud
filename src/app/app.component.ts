@@ -108,18 +108,21 @@ public create() {
     this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
     this.bsModalRef.content.title = 'Update Confirmation';
     this.bsModalRef.content.message = 'Please select only one row';
+    this.bsModalRef.content.action = "warning";
   }
   else if(this.selectedRows.length < 1)
   {
     this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
     this.bsModalRef.content.title = 'Update Confirmation';
     this.bsModalRef.content.message = 'Please select atleast one row';
+    this.bsModalRef.content.action = "warning";
   }
   else
   {
     this.bsModalRef = this.modalService.show(UpdateCarModalComponent);
     this.bsModalRef.content.title = 'Update Car';
      this.bsModalRef.content.dealer = 'dealer name';
+      this.bsModalRef.content.action = "update";
   }
  }
 
@@ -130,12 +133,15 @@ public create() {
        this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
        this.bsModalRef.content.title = 'Delete Confirmation';
        this.bsModalRef.content.message = 'Please select atleast one row';
+       this.bsModalRef.content.action = "warning";
     }
     else
     {
        this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
        this.bsModalRef.content.title = 'Delete Confirmation';
        this.bsModalRef.content.message = "are you sure you want to delete the " + this.selectedRows.length + " selected rows ";
+       this.bsModalRef.content.action = "delete";
+       this.bsModalRef.content.myGridOptions = this.myGridOptions;
     }
   }
 
