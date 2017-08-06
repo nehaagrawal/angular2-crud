@@ -2,6 +2,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Component ,OnInit , TemplateRef  } from '@angular/core';
 import {GridOptions} from "ag-grid/main";
+import {HttpRequestService} from '../../services/HttpRequest.service';
 
 
 @Component({
@@ -11,9 +12,9 @@ import {GridOptions} from "ag-grid/main";
 })
 export class ConfirmationModalComponent {
   public title: string;
-  public action: boolean;
+  public action: string;
   public myGridOptions: GridOptions;
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef , private httpRequestService : HttpRequestService) {}
 
 
 confirm()
@@ -22,10 +23,12 @@ confirm()
   {
     var selectedData = this.myGridOptions.api.getSelectedRows();
     var res = this.myGridOptions.api.updateRowData({remove: selectedData});
+    //this.httpRequestService.delete();
   }
   else if (this.action == "update")
   {
 
+//this.httpRequestService.update();
   }
     this.bsModalRef.hide();
 
