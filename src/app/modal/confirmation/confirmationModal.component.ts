@@ -14,6 +14,7 @@ export class ConfirmationModalComponent {
   public title: string;
   public action: string;
   public myGridOptions: GridOptions;
+  private selectedRows: any[];
   constructor(public bsModalRef: BsModalRef , private httpRequestService : HttpRequestService) {}
 
 
@@ -23,7 +24,7 @@ confirm()
   {
     var selectedData = this.myGridOptions.api.getSelectedRows();
     var res = this.myGridOptions.api.updateRowData({remove: selectedData});
-    //this.httpRequestService.delete();
+    //this.httpRequestService.delete(this.selectedRows);
   }
   else if (this.action == "update")
   {

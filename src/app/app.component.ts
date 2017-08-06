@@ -142,6 +142,7 @@ public create() {
        this.bsModalRef.content.message = "are you sure you want to delete the " + this.selectedRows.length + " selected rows ";
        this.bsModalRef.content.action = "delete";
        this.bsModalRef.content.myGridOptions = this.myGridOptions;
+       this.bsModalRef.content.selectedRows = this.selectedRows;
     }
   }
 
