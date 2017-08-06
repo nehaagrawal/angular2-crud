@@ -99,6 +99,7 @@ getColumnDef() : any[] {
 public create() {
     this.bsModalRef = this.modalService.show(ModalContentComponent);
     this.bsModalRef.content.title = 'Create New Car';
+    this.bsModalRef.content.action = 'create';
 }
 
  update()
@@ -119,8 +120,9 @@ public create() {
   }
   else
   {
-    this.bsModalRef = this.modalService.show(UpdateCarModalComponent);
+   this.bsModalRef = this.modalService.show(ModalContentComponent);
     this.bsModalRef.content.title = 'Update Car';
+    this.bsModalRef.content.action = 'update';
     console.log("selected row " + JSON.stringify(this.selectedRows[0]));
      this.bsModalRef.content.model.make = this.selectedRows[0].make;
      this.bsModalRef.content.model.modelNumber = this.selectedRows[0].modelNumber;

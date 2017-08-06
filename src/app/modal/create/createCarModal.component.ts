@@ -13,11 +13,14 @@ import {Car} from "../../model/Car";
 export class ModalContentComponent {
   public title: string;
   model = new Car();
+  action: string;
   constructor(public bsModalRef: BsModalRef , private httpRequestService : HttpRequestService) {}
 
 save()
 {
 
+if(this.action == "create")
+{
 console.log("clicked on save " );
 console.log("make " + this.model.make);
 console.log("model " + this.model.modelNumber);
@@ -28,6 +31,12 @@ console.log("rating " + this.model.rating);
 console.log("dealer " + this.model.dealer);
 
 //this.httpRequestService.create();
+}
+else if (this.action == "update")
+{
+//this.httpRequestService.update();
+}
+
 
 this.bsModalRef.hide();
 }
