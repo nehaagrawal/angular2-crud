@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   private rowData;
   public bsModalRef: BsModalRef;
   private updatedRows : any[];
+  private selectedRows: any[];
 
 constructor (private httpRequestService : HttpRequestService , private modalService: BsModalService )
 {
@@ -58,6 +59,7 @@ private createGridOptions ()
    enableFilter: true,
    pagination: true,
    rowSelection : 'multiple',
+   onSelectionChanged: this.onSelectionChanged,
    onCellValueChanged : function(event)
    {
    var data = event.data;
@@ -67,18 +69,18 @@ private createGridOptions ()
    console.log(" this.updatedRows" + JSON.stringify( this.updatedRows) );
 
    //keep an array of all update rows. On click of update , pass that array to rest service and then clear it.
-   },
-   onSelectionChanged: this.onSelectionChanged
+   }
   };
 
 return gridOptions;
 }
 
-onSelectionChanged()
+onSelectionChanged(event: any) {
+if(this.myGridOptions)
 {
-console.log('selection changed');
-var selectedRows = this.myGridOptions.api.getSelectedRows();
-  // console.log(JSON.stringify(selectedRows) );
+  this.selectedRows = this.myGridOptions.api.getSelectedRows();
+   console.log(JSON.stringify(this.selectedRows) );
+}
 }
 
 getGridOptions() : GridOptions
@@ -93,11 +95,6 @@ getColumnDef() : any[] {
 public create(template: TemplateRef<any>) {
     this.bsModalRef = this.modalService.show(ModalContentComponent);
    this.bsModalRef.content.title = 'Create New Car';
-   let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
-      this.bsModalRef.content.list = list;
-      setTimeout(() => {
-        list.push('PROFIT!!!');
-      }, 2000);
   }
 
   update()
@@ -107,7 +104,7 @@ public create(template: TemplateRef<any>) {
 
   delete()
   {
-  alert("delete is called");
+  alert("are you sure you want to delete the " + this.selectedRows.length + " selected rows " );
 
   }
 
