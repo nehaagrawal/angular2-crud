@@ -8,11 +8,13 @@ import {HttpModule} from '@angular/http';
 import {HttpRequestService} from './services/HttpRequest.service';
 import { ModalModule } from 'ngx-bootstrap';
 import { DatepickerModule } from 'ngx-bootstrap';
-import { ModalContentComponent } from './modal/createCarModal.component';
+import { ModalContentComponent } from './modal/create/createCarModal.component';
+import { UpdateCarModalComponent } from './modal/update/updateCarModal.component';
+import { ConfirmationModalComponent } from './modal/confirmation/confirmationModal.component';
 
 @NgModule({
   declarations: [
-    AppComponent , ModalContentComponent
+    AppComponent , ModalContentComponent , UpdateCarModalComponent , ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,6 @@ import { ModalContentComponent } from './modal/createCarModal.component';
   ],
   providers: [HttpRequestService],
   bootstrap: [AppComponent],
-  entryComponents : [ModalContentComponent]
+  entryComponents : [ModalContentComponent , UpdateCarModalComponent , ConfirmationModalComponent]
 })
 export class AppModule { }

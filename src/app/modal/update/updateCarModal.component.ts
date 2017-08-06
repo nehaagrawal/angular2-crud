@@ -1,22 +1,25 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Component ,OnInit , TemplateRef  } from '@angular/core';
-import {HttpRequestService} from '../services/HttpRequest.service';
-import {Car} from "../Car";
+import {HttpRequestService} from '../../services/HttpRequest.service';
+import {Car} from "../../Car";
 
 
 @Component({
   selector: 'modal-content',
-  templateUrl: './createCarModal.component.html',
-    styleUrls: ['./createCarModal.component.css']
+  templateUrl: './updateCarModal.component.html',
+    styleUrls: ['./updateCarModal.component.css']
 })
-export class ModalContentComponent {
+export class UpdateCarModalComponent {
   public title: string;
   public list: any[] = [];
   model = new Car();
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef) {
 
-save()
+
+  }
+
+update()
 {
 
 console.log("clicked on save " );

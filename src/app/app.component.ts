@@ -4,7 +4,9 @@ import {HttpRequestService} from './services/HttpRequest.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import {Car} from "./Car";
-import {ModalContentComponent} from "./modal/createCarModal.component";
+import {ModalContentComponent} from "./modal/create/createCarModal.component";
+import {UpdateCarModalComponent} from "./modal/update/updateCarModal.component";
+import {ConfirmationModalComponent} from "./modal/confirmation/confirmationModal.component";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,7 @@ export class AppComponent implements OnInit {
   private myGridOptions: GridOptions;
   private rowData;
   public bsModalRef: BsModalRef;
-  private updatedRows : any[];
+  private updatedRowsData : any[];
   private selectedRows: any[];
 
 constructor (private httpRequestService : HttpRequestService , private modalService: BsModalService )
@@ -25,6 +27,7 @@ constructor (private httpRequestService : HttpRequestService , private modalServ
 
 }
 ngOnInit(): void {
+this.selectedRows = [];
   this.myGridOptions = this.createGridOptions();
   this.myColumnDefs = [
   {headerName : "#" , width: 30 , checkboxSelection: true , suppressSorting : true , suppresssMenu: true , pinned: true},
@@ -58,18 +61,7 @@ private createGridOptions ()
    enableSorting : true,
    enableFilter: true,
    pagination: true,
-   rowSelection : 'multiple',
-   onSelectionChanged: this.onSelectionChanged,
-   onCellValueChanged : function(event)
-   {
-   var data = event.data;
-   console.log("row data " + JSON.stringify(data) );
-  // this.updatedRows.push(data);
-   console.log("onCellValueChanged " + event.colDef.field + "= " + event.newValue );
-   console.log(" this.updatedRows" + JSON.stringify( this.updatedRows) );
-
-   //keep an array of all update rows. On click of update , pass that array to rest service and then clear it.
-   }
+   rowSelection : 'multiple'
   };
 
 return gridOptions;
@@ -83,6 +75,18 @@ if(this.myGridOptions)
 }
 }
 
+   onCellValueChanged (event : any)
+   {
+   var data = event.data;
+   console.log("row data " + JSON.stringify(data) );
+   this.updatedRowsData.push(data);
+   console.log("onCellValueChanged " + event.colDef.field + "= " + event.newValue );
+   console.log(" this.updatedRowsData" + JSON.stringify( this.updatedRowsData) );
+
+   //keep an array of all update rows. On click of update , pass that array to rest service and then clear it.
+   }
+
+
 getGridOptions() : GridOptions
 {
   return this.myGridOptions;
@@ -92,20 +96,47 @@ getColumnDef() : any[] {
   return this.myColumnDefs;
 }
 
-public create(template: TemplateRef<any>) {
+public create() {
     this.bsModalRef = this.modalService.show(ModalContentComponent);
-   this.bsModalRef.content.title = 'Create New Car';
-  }
+    this.bsModalRef.content.title = 'Create New Car';
+}
 
-  update()
+ update()
   {
-  alert("update is called");
+  if(this.selectedRows.length > 1)
+  {
+    this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
+    this.bsModalRef.content.title = 'Update Confirmation';
+    this.bsModalRef.content.message = 'Please select only one row';
   }
+  else if(this.selectedRows.length < 1)
+  {
+    this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
+    this.bsModalRef.content.title = 'Update Confirmation';
+    this.bsModalRef.content.message = 'Please select atleast one row';
+  }
+  else
+  {
+    this.bsModalRef = this.modalService.show(UpdateCarModalComponent);
+    this.bsModalRef.content.title = 'Update Car';
+     this.bsModalRef.content.dealer = 'dealer name';
+  }
+ }
 
   delete()
   {
-  alert("are you sure you want to delete the " + this.selectedRows.length + " selected rows " );
-
+    if(this.selectedRows.length < 1)
+    {
+       this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
+       this.bsModalRef.content.title = 'Delete Confirmation';
+       this.bsModalRef.content.message = 'Please select atleast one row';
+    }
+    else
+    {
+       this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
+       this.bsModalRef.content.title = 'Delete Confirmation';
+       this.bsModalRef.content.message = "are you sure you want to delete the " + this.selectedRows.length + " selected rows ";
+    }
   }
 
 }
